@@ -34,4 +34,4 @@ COPY --from=build /usr/local/lib/python3.11/dist-packages/ /usr/local/lib/python
 COPY --from=build /usr/local/bin/wapiti /usr/local/bin/wapiti-getcookie /usr/local/bin/
 COPY --chmod=644 openssl_conf /etc/wapiti/
 
-ENTRYPOINT ["wapiti"]
+ENTRYPOINT ["/bin/sh", "-c", "wapiti $@ && cat /tmp/wapiti-output.json", "--"]
